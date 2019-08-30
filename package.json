@@ -1,0 +1,30 @@
+{
+  "name": "financial-app",
+  "version": "1.0.0",
+  "description": "a financial app ",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darko875/financial-app.git"
+  },
+  "keywords": [
+    "financial-app",
+    "app",
+    "node"
+  ],
+  "author": "Daniel Sá",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Darko875/financial-app/issues"
+  },
+  "homepage": "https://github.com/Darko875/financial-app#readme"
+}
