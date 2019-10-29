@@ -13,15 +13,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    payments: ['Payment'],
-    hash:{ 
-        type: String,
-        required: false
-    },
-    salt:{ 
-        type: String,
-        required: false
-    }
+    payments: ['Payment']
 });
 
 module.exports = mongoose.model('User', UserSchema);
