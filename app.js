@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const indexRouter = require('./routes/index')
+const payments = require('./routes/payments')
 
 //set up engine 
 app.set('view engine', 'ejs');
@@ -28,6 +29,7 @@ db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connect to Mongoose'))
 
 app.use('/', indexRouter)
+app.use('/payments', payments)
 
 
 app.listen(3000,() => {
