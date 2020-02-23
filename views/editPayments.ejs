@@ -51,7 +51,7 @@
         <h1>Financial App</h1>
         <h2>Homepage</h2>
     </header>
-    <form action="/process-payment" method="post">
+    <form action="/dashboard/<%= book.id %>?_method=PUT" method="post">
         <label>Type of Payment:
             <select name="type" id="type">
                 <option value="Mensal Payments">Mensal Payments</option>
@@ -83,14 +83,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(var i=0; i < payments.length; i++){ %>
                         <tr>
-                            <td><%= payments[i].type %></td>
-                            <td><%= payments[i].value %></td>
-                            <td><%= payments[i].month %></td>
-                            <td><%= payments[i].status %></td>
+                            <td><%= payments.type %></td>
+                            <td><%= payments.value %></td>
+                            <td><%= payments.month %></td>
+                            <td><%= payments.status %></td>
                         </tr>
-                    <% } %>
                 </tbody>
             </table>
         </div>
