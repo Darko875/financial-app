@@ -20,13 +20,14 @@ module.exports = (app) => {
     })
 
     app.post('/process-payment', urlencodedParser, async (req, res) => {
-        const { type, value, month, status } = req.body;
+        const { type, value, month, year, status } = req.body;
         const user_id = req.session.passport.user;
         console.log(user_id)
         const newPayments = new Payments({
             type: type, 
             value: value, 
-            month: month, 
+            month: month,
+            year: year, 
             status: status,
             user: user_id
         })
@@ -39,46 +40,50 @@ module.exports = (app) => {
           }
     })
 
-    // Edit Book Route
+    // Edit Payment Route
     app.get('/dashboard/:id', async (req, res) => {
     try {
-      const payments = await Payments.findById(req.params.id)
-      renderEditPage(res, payments)
+      const payments = await Payments.find({_id: mongoose.Types.ObjectId(req.params.id)})
+      res.render('editPayments', {payments: payments})
+      console.log(req.params.id)
     } catch {
       res.redirect('/')
     }
   })
   
-  // Update Book Route
-    app.put('/dashboard/:id', async (req, res) => {
+  // Update Payment Route
+    app.post('/dashboard/:id', async (req, res) => {
     let payments
     const { type, value, month, status } = req.body;
     try {
-      payments = await Payments.findById(req.params.id)
-      payments.type = type
-      payments.value = value
-      payments.month = month
-      payments.status = status
-      await payments.save()
-      res.redirect(`/dashboard/${payments.id}`)
+         //Payments.find({_id: mongoose.Types.ObjectId(req.params.id)})
+        await Payments.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), req.body, {new: true})
+        res.redirect(`/dashboard/${payments.id}`)
     } catch {
       if (payments != null) {
-        renderEditPage(res, payments, true)
+        res.redirect(`/dashboard/${req.params.id}`)
       } else {
         res.redirect('/dashboard')
       }
     }
   })
+
+  app.get('/dashboard/:id/delete', async (req, res) => {
+    try {
+      res.render('deletePayments')
+    } catch {
+      res.redirect('/')
+    }
+  })
   
-  // Delete Book Page
-    app.delete('/dashboard/:id', async (req, res) => {
+  // Delete Payment Page
+    app.post('/dashboard/:id/delete', async (req, res) => {
     let payments
     try {
-      payments = await Payments.findById(req.params.id)
-      await payments.remove()
+      await Payments.findByIdAndRemove({_id: mongoose.Types.ObjectId(req.params.id)})
       res.redirect('/dashboard')
     } catch {
-      if (book != null) {
+      if (payments != null) {
         res.render('payments', 
             { payments: payments })
       } else {
@@ -86,25 +91,7 @@ module.exports = (app) => {
       }
     }
   })
-  
-  
-  
-  async function renderEditPage(res, payments, hasError = false) {
-    renderFormPage(res, payments, hasError)
-  }
-  
-  async function renderFormPage(res, payments, form, hasError = false) {
-    try {
-      const payments = await Payments.find({})
-      const params = {
-        payments: payments,
-      }
-      
-      res.render('editPayments', params)
-    } catch {
-      res.redirect('/dashboard')
-    }
-  }
+
 }
 
 

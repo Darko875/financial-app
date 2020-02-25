@@ -45,13 +45,17 @@
     <nav>
         <ul>
             <li><a href="/">Homepage</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
     <header>
         <h1>Financial App</h1>
         <h2>Homepage</h2>
     </header>
-    <form action="/dashboard/<%= book.id %>?_method=PUT" method="post">
+        <% for(var i=0; i < payments.length; i++){ %>
+    <form action="/dashboard/<%= payments[i].id %>?_method=PUT" method="post">
+        <% } %>
         <label>Type of Payment:
             <select name="type" id="type">
                 <option value="Mensal Payments">Mensal Payments</option>
@@ -61,7 +65,38 @@
             </select>
         </label>
         Value:<input type="number" name="value" id="value">
-        Month:<input type="month" name="month" id="month">  
+        <label>Month
+            <select name="month" id="month">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+        </label>  
+        <label>Year
+            <select name="year" id="year">
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+            </select>
+        </label>  
         <label>Status:
             <select name="status" id="status">
                 <option value="Paid out">Paid out</option>
@@ -76,19 +111,28 @@
             <table style="width:50%">  
                 <thead>
                     <tr>
-                        <th>type</th>
-                        <th>value</th>
-                        <th>month</th>
-                        <th>status</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <% for(var i=0; i < payments.length; i++){ %>
                         <tr>
-                            <td><%= payments.type %></td>
-                            <td><%= payments.value %></td>
-                            <td><%= payments.month %></td>
-                            <td><%= payments.status %></td>
+                            <td><%= payments[i].type %></td>
+                            <td><%= payments[i].value %></td>
+                            <td><%= payments[i].month %></td>
+                            <td><%= payments[i].year %></td>
+                            <td><%= payments[i].status %></td>
+                            <td>
+                                <form method="post" action="/dashboard/<%= payments[i].id %>/delete">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
                         </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>

@@ -6,9 +6,13 @@ const PaymentsSchema = new mongoose.Schema({
         required: true
     },
     month: {
-        type: Date, 
+        type: String, 
         required: true
     },   
+    year: {
+        type: String, 
+        required: true
+    },
     value: { 
         type: Number,
         required: true
