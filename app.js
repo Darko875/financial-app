@@ -48,6 +48,6 @@ paymentsRouter(app)
 
 
 
-app.listen(process.env.APP_URL,() => {
+app.listen(process.env.APP_URL || 3000,() => {
     console.log('Listenning to requests on port 3000');
 });
