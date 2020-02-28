@@ -27,7 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
     session({
-      secret: 'secret',
+      secret: process.env.SECRET,
       resave: true,
       saveUninitialized: true
     })
@@ -37,7 +37,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb+srv://admin:Shv36c8JwXgDK2F2@cluster0-ijjtf.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connect to Mongoose'))
@@ -48,6 +48,6 @@ paymentsRouter(app)
 
 
 
-app.listen(3000,() => {
+app.listen(process.env.APP_URL,() => {
     console.log('Listenning to requests on port 3000');
 });
