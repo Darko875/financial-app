@@ -15,11 +15,7 @@ app.post('/process-register', async (req, res) => {
     let errors = [];
   
     if (!name || !email || !password) {
-      errors.push({ msg: 'Please enter all fields' });
-    }
-  
-    else if (password.length < 6) {
-      errors.push({ msg: 'Password must be at least 6 characters' });
+      redirect('/')
     }
     
     else {

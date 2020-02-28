@@ -24,6 +24,42 @@
             text-decoration: none;
             display: block;
         }
+        .css-input { 
+            padding:3px; 
+            font-size:13px; 
+            border-width:2px; 
+            box-shadow: 1px 0px 0px 0px rgba(42,42,42,.75); 
+            font-weight:normal; 
+            text-align:center; 
+            background-color:#000000; 
+            border-color:#164622; 
+            color:#164622; 
+            border-radius:24px; 
+            border-style:solid;  
+        } 
+        .css-input:focus { outline:none; }
+        .myButton {
+            background-color:#000000;
+            border-radius:42px;
+            border:2px solid #16441D;
+            display:inline-block;
+            cursor:pointer;
+            color:#16441D;
+            font-family:Arial;
+            font-size:13px;
+            padding:5px 20px;
+            text-decoration:none;
+        }
+        #div1{
+            display: inline-block;
+            padding-left: 30%;
+            height: 100%;
+        }
+        #div2{
+            display: inline-block;
+            padding-left: 10%;
+        }
+        
     </style>
 </head>
 <body>
@@ -33,19 +69,24 @@
         </ul>
     </nav>
     <header>
-        <h1>Financial App</h1>
-        <h2>Homepage</h2>
+        <h2>Homepage</h3>
     </header>
     <main>
-        <p>Just the best financial app</p>
+        <h3>Just the best financial app</h4>
     </main>
-    <form action="/process-register" method="post" role="form">
-        <%- include('./partials/user/_form_fields_register.ejs') %>
-        <input type="submit" value="Submit">
-    </form>
-    <form action="/process-login" method="post">
-        <%- include('./partials/user/_form_fields_login.ejs') %>
-            <input type="submit" value="Submit">
-    </form>
+    <div id="div1">
+        <h4>Register</h4>
+        <form action="/process-register" method="post" role="form" id="form1">
+            <%- include('./partials/user/_form_fields_register.ejs') %><br><br><br>
+            <input type="submit" class="myButton" value="Sign Up">
+        </form>
+    </div>
+    <div id="div2">
+        <h4 id="login_title">Login</h4>
+        <form action="/process-login" method="post" id="form2">
+            <%- include('./partials/user/_form_fields_login.ejs') %><br><br><br>
+            <input type="submit" class="myButton" value="Sign In">
+        </form>
+    </div>
 </body>
 </html>

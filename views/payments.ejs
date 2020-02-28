@@ -21,91 +21,149 @@
             text-decoration: none;
             display: block;
         }
-        table { 
-        width: 100px; 
-        border-collapse: collapse; 
+        table.payments-table {
+        border: 1px solid #000000;
+        background-color: #000000;
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
         }
-        /* Zebra striping */
-        tr:nth-of-type(odd) { 
-        background: #eee; 
+        table.payments-table td, table.payments-table th {
+        border: 1px solid #16462A;
+        padding: 3px 4px;
         }
-        th { 
-        background: #333; 
-        color: white; 
-        font-weight: bold; 
+        table.payments-table tbody td {
+        font-size: 13px;
+        color: #16462A;
         }
-        td, th { 
-        padding: 6px; 
-        border: 1px solid #ccc; 
-        text-align: left; 
+        table.payments-table tr:nth-child(even) {
+        background: #000000;
         }
+        table.payments-table td:nth-child(even) {
+        background: #000000;
+        }
+        table.payments-table thead {
+        background: #000000;
+        border-bottom: 0px solid #000000;
+        }
+        table.payments-table thead th {
+        font-size: 16px;
+        font-weight: bold;
+        color: #16462A;
+        text-align: center;
+        border-left: 0px solid #000000;
+        }
+        table.payments-table thead th:first-child {
+        border-left: none;
+        }
+
+        table.payments-table tfoot {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+        background: #010101;
+        background: -moz-linear-gradient(top, #404040 0%, #1a1a1a 66%, #010101 100%);
+        background: -webkit-linear-gradient(top, #404040 0%, #1a1a1a 66%, #010101 100%);
+        background: linear-gradient(to bottom, #404040 0%, #1a1a1a 66%, #010101 100%);
+        border-top: 2px solid #010101;
+        }
+        table.payments-table tfoot td {
+        font-size: 14px;
+        }
+        .css-input { 
+            padding:3px; 
+            font-size:13px; 
+            border-width:2px; 
+            box-shadow: 1px 0px 0px 0px rgba(42,42,42,.75); 
+            font-weight:normal; 
+            text-align:center; 
+            background-color:#000000; 
+            border-color:#164622; 
+            color:#164622; 
+            border-radius:24px; 
+            border-style:solid;  
+        } 
+        .css-input:focus { outline:none; }
+        .myButton {
+            background-color:#000000;
+            border-radius:42px;
+            border:2px solid #16441D;
+            display:inline-block;
+            cursor:pointer;
+            color:#16441D;
+            font-family:Arial;
+            font-size:13px;
+            padding:5px 20px;
+            text-decoration:none;
+        }
+
     </style>
 </head>
 <body>
     <nav>
-        <ul>
-            <li><a href="/">Homepage</a></li>
+        <ul id="menu">
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
     <header>
-        <h1>Financial App</h1>
         <h2>Dashboard</h2>
     </header>
-    <form action="/process-payment" method="post">
-        <label>Type of Payment:
-            <select name="type" id="type">
-                <option value="Mensal Payments">Mensal Payments</option>
-                <option value="Extra Payments">Extra Payments</option>
-                <option value="Loans">Loans</option>
-                <option value="Others Payments">Others Payments</option>
-            </select>
-        </label>
-        Value:<input type="number" name="value" id="value">
-        <label>Month
-            <select name="month" id="month">
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-            </select>
-        </label>  
-        <label>Year
-            <select name="year" id="year">
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-                <option value="2031">2031</option>
-            </select>
-        </label>
-        <label>Status:
-            <select name="status" id="status">
-                <option value="Paid out">Paid out</option>
-                <option value="Unpaid">Unpaid</option>
-            </select>
-        </label>  
-        <input type="submit" value="Submit">
-    </form>
+    <div align="center">
+        <form action="/process-payment" method="post">
+            <label>Type of Payment:
+                <select name="type" id="type" class="css-input css-input:focus">
+                    <option value="Mensal Payments">Mensal Payments</option>
+                    <option value="Extra Payments">Extra Payments</option>
+                    <option value="Loans">Loans</option>
+                    <option value="Others Payments">Others Payments</option>
+                </select>
+            </label>
+            Value:<input type="number" name="value" id="value" class="css-input css-input:focus">
+            <label>Month
+                <select name="month" id="month" class="css-input css-input:focus">
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+            </label>  
+            <label>Year
+                <select name="year" id="year" class="css-input css-input:focus">
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                    <option value="2031">2031</option>
+                </select>
+            </label>
+            <label>Status:
+                <select name="status" id="status" class="css-input css-input:focus">
+                    <option value="Paid out">Paid out</option>
+                    <option value="Unpaid">Unpaid</option>
+                </select>
+            </label>  
+            <input type="submit" class="myButton" value="Create Payment">
+        </form>
+    </div>
 
-    <h1>My Payments</h1>
-        <div id="payments-table">
-            <table style="width:50%">  
+    <h3>My Payments</h3>
+        <div id="payments-table" >
+            <table style="width:50%" align="center">  
                 <thead>
                     <tr>
                         <th>Type</th>
@@ -118,14 +176,14 @@
                 <tbody>
                     <% for(var i=0; i < payments.length; i++){ %>
                         <tr>
-                            <td><%= payments[i].type %></td>
-                            <td><%= payments[i].value %></td>
-                            <td><%= payments[i].month %></td>
-                            <td><%= payments[i].year %></td>
-                            <td><%= payments[i].status %></td>
-                            <td><a class="btn btn-primary" href="/dashboard/<%= payments[i].id %>">Edit</a></td>
-                            <td><form method="post" action="/dashboard/<%= payments[i].id %>/delete">
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                            <td align="center"><%= payments[i].type %></td>
+                            <td align="center"><%= payments[i].value %></td>
+                            <td align="center"><%= payments[i].month %></td>
+                            <td align="center"><%= payments[i].year %></td>
+                            <td align="center"><%= payments[i].status %></td>
+                            <td align="center"><a class="myButton" href="/dashboard/<%= payments[i].id %>">Edit</a></td>
+                            <td align="center"><form method="post" action="/dashboard/<%= payments[i].id %>/delete">
+                                <button class="myButton" type="submit">Delete</button>
                             </form>
                             </td>
                         </tr>

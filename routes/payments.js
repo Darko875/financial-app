@@ -21,6 +21,9 @@ module.exports = (app) => {
 
     app.post('/process-payment', urlencodedParser, async (req, res) => {
         const { type, value, month, year, status } = req.body;
+        if (!type || !value || !month || !year || !status){
+            redirect('/dashboard')
+        }
         const user_id = req.session.passport.user;
         console.log(user_id)
         const newPayments = new Payments({
@@ -55,6 +58,9 @@ module.exports = (app) => {
     app.post('/dashboard/:id', async (req, res) => {
     let payments
     const { type, value, month, status } = req.body;
+    if (!req.body){
+        redirect('/dashboard')
+    }
     try {
          //Payments.find({_id: mongoose.Types.ObjectId(req.params.id)})
         await Payments.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), req.body, {new: true})
