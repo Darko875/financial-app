@@ -22,7 +22,7 @@ module.exports = (app) => {
     app.post('/process-payment', urlencodedParser, async (req, res) => {
         const { type, value, month, year, status } = req.body;
         if (!type || !value || !month || !year || !status){
-            redirect('/dashboard')
+            res.redirect('/dashboard')
         }
         const user_id = req.session.passport.user;
         console.log(user_id)
@@ -59,7 +59,7 @@ module.exports = (app) => {
     let payments
     const { type, value, month, status } = req.body;
     if (!req.body){
-        redirect('/dashboard')
+        res.redirect('/dashboard')
     }
     try {
          //Payments.find({_id: mongoose.Types.ObjectId(req.params.id)})

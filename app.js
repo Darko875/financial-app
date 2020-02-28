@@ -37,7 +37,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://admin:Shv36c8JwXgDK2F2@cluster0-ijjtf.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connect to Mongoose'))

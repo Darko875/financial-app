@@ -15,7 +15,7 @@ app.post('/process-register', async (req, res) => {
     let errors = [];
   
     if (!name || !email || !password) {
-      redirect('/')
+      res.redirect('/')
     }
     
     else {
