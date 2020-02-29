@@ -8,9 +8,10 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 
-module.exports = (app) => {
 
-app.post('/process-register', async (req, res) => {
+
+
+router.post('/process-register', async (req, res) => {
     const { name, email, password} = req.body;
     let errors = [];
   
@@ -41,7 +42,7 @@ app.post('/process-register', async (req, res) => {
       }
     })
   
-  app.post('/process-login', (req,res,next) => {
+    router.post('/process-login', (req,res,next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
         failureRedirect: '/'
@@ -49,9 +50,9 @@ app.post('/process-register', async (req, res) => {
 })
   
   // Logout
-  app.get('/logout', (req, res) => {
+  router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
 
-}
+module.exports = router 

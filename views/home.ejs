@@ -76,14 +76,14 @@
     </main>
     <div id="div1">
         <h4>Register</h4>
-        <form action="/process-register" method="post" role="form" id="form1">
+        <form action="/user/process-register" method="post" role="form" id="form1">
             <%- include('./partials/user/_form_fields_register.ejs') %><br><br><br>
             <input type="submit" class="myButton" value="Sign Up">
         </form>
     </div>
     <div id="div2">
         <h4 id="login_title">Login</h4>
-        <form action="/process-login" method="post" id="form2">
+        <form action="/user/process-login" method="post" id="form2">
             <%- include('./partials/user/_form_fields_login.ejs') %><br><br><br>
             <input type="submit" class="myButton" value="Sign In">
         </form>

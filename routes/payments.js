@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const router = express.Router()
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
@@ -8,18 +9,8 @@ const Payments = require('../models/payments')
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
-module.exports = (app) => {
-    app.get('/dashboard', async (req, res) => {
-        let user_id1 = req.session.passport.user
-        let user_id = user_id1.toString()
-        console.log(user_id)
-        const payments = await Payments.find({user: mongoose.Types.ObjectId(user_id)}).populate('user').exec()  
-        res.render('payments', {payments: payments})  
-        
 
-    })
-
-    app.post('/process-payment', urlencodedParser, async (req, res) => {
+    router.post('/process-payment', urlencodedParser, async (req, res) => {
         const { type, value, month, year, status } = req.body;
         if (!type || !value || !month || !year || !status){
             res.redirect('/dashboard')
@@ -36,7 +27,7 @@ module.exports = (app) => {
         })
         try {
             const pay = await newPayments.save().catch(err => console.log(err));
-            res.redirect(`dashboard/${newPayments.id}`)
+            res.redirect(`/dashboard/${newPayments.id}`)
             
           } catch {
             res.redirect('/dashboard')
@@ -44,18 +35,18 @@ module.exports = (app) => {
     })
 
     // Edit Payment Route
-    app.get('/dashboard/:id', async (req, res) => {
+    router.get('/:id', async (req, res) => {
     try {
       const payments = await Payments.find({_id: mongoose.Types.ObjectId(req.params.id)})
       res.render('editPayments', {payments: payments})
       console.log(req.params.id)
     } catch {
-      res.redirect('/')
+      res.redirect('/dashboard')
     }
   })
   
   // Update Payment Route
-    app.post('/dashboard/:id', async (req, res) => {
+  router.post('/:id', async (req, res) => {
     let payments
     const { type, value, month, status } = req.body;
     if (!req.body){
@@ -74,7 +65,7 @@ module.exports = (app) => {
     }
   })
 
-  app.get('/dashboard/:id/delete', async (req, res) => {
+  router.get('/:id/delete', async (req, res) => {
     try {
       res.render('deletePayments')
     } catch {
@@ -83,7 +74,7 @@ module.exports = (app) => {
   })
   
   // Delete Payment Page
-    app.post('/dashboard/:id/delete', async (req, res) => {
+  router.post('/:id/delete', async (req, res) => {
     let payments
     try {
       await Payments.findByIdAndRemove({_id: mongoose.Types.ObjectId(req.params.id)})
@@ -98,7 +89,7 @@ module.exports = (app) => {
     }
   })
 
-}
+module.exports = router
 
 
 

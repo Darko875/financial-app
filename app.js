@@ -42,9 +42,9 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connect to Mongoose'))
 
-indexRouter(app)
-usersRouter(app)
-paymentsRouter(app)
+app.use('/', indexRouter)
+app.use('/user', usersRouter)
+app.use('/dashboard', paymentsRouter)
 
 
 
